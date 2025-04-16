@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
 		const basePath = path.join(process.cwd(), "src", "assets");
 
 		const templatePath = path.join(basePath, "images", "certificate-template.png");
-		const fontPath = path.join(basePath, "fonts", "Montserrat-Italic-VariableFont_wght.ttf");
+		const fontPath = path.join(basePath, "fonts", "Montserrat-Bold.ttf");
 
 		if (!fs.existsSync(templatePath)) {
 			return NextResponse.json({ error: "Template sertifikat tidak ditemukan" }, { status: 500 });
