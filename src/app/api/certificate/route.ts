@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
 		ctx.textAlign = "center";
 
 		const namaLengkap = peserta.nama.toUpperCase();
-		ctx.fillText(namaLengkap, image.width / 2, image.height / 2 - 54);
+		ctx.fillText(namaLengkap, image.width / 2, image.height / 2 - 44);
 
 		const buffer = canvas.toBuffer("image/png");
 
