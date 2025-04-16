@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
 	}
 
 	// Proteksi hanya untuk endpoint tertentu
-	const protectedRoutes = ["/api/dashboard", "/api/certificate", "/api/peserta"];
+	const protectedRoutes = ["/api/dashboard",  "/api/peserta"];
 
 	const isProtected = protectedRoutes.some((route) => pathname.startsWith(route));
 	if (!isProtected) {
@@ -44,5 +44,5 @@ export async function middleware(request: NextRequest) {
 
 // Tentukan route mana yang dipantau middleware
 export const config = {
-	matcher: ["/api/dashboard/:path*", "/api/certificate/:path*", "/api/peserta/:path*"],
+	matcher: ["/api/dashboard/:path*",  "/api/peserta/:path*"],
 };
