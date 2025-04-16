@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
 		const basePath = path.join(process.cwd(), "src", "assets");
 
 		const templatePath = path.join(basePath, "images", "certificate-template.png");
-		const fontPath = path.join(basePath, "fonts", "Montserrat-Bold.ttf");
+		const fontPath = path.join(basePath, "fonts", "Montserrat-Italic-VariableFont_wght.ttf");
 
 		if (!fs.existsSync(templatePath)) {
 			return NextResponse.json({ error: "Template sertifikat tidak ditemukan" }, { status: 500 });
@@ -44,7 +44,8 @@ export async function GET(request: NextRequest) {
 		ctx.drawImage(image, 0, 0, image.width, image.height);
 
 		// Atur gaya teks (font harus sama dengan yang diregister)
-		ctx.font = '120px "Montserrat", sans-serif';
+		// ctx.font = '120px "Montserrat", sans-serif';
+		ctx.font = 'italic 600 120px "MontserratItalic"';
 		ctx.fillStyle = "#333333";
 		ctx.textAlign = "center";
 
