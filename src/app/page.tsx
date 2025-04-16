@@ -136,7 +136,6 @@ export default function CertificatePage() {
 						<li>Sertifikat hanya tersedia untuk peserta yang terdaftar.</li>
 						<li>Pastikan email yang Anda masukkan adalah email yang digunakan saat pendaftaran.</li>
 						<li>Sertifikat akan diunduh dalam format PNG.</li>
-						<li>Jika Anda memiliki kendala, silakan hubungi admin melalui contact@example.com</li>
 					</ul>
 				</div>
 			</div>

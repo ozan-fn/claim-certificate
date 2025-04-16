@@ -26,12 +26,27 @@ export async function POST(request: NextRequest) {
 			}
 		}
 
-		// Simpan data peserta menggunakan Prisma
-		const result = await prisma.peserta.createMany({
-			data: body.participants.map((p: { name: string; email: string }) => ({
+		// Ambil nomor sertifikat terbesar yang sudah ada
+		const lastPeserta = await prisma.peserta.findFirst({
+			where: { nomorSertifikat: { not: null } },
+			orderBy: { nomorSertifikat: "desc" },
+		});
+
+		const startNomor = lastPeserta ? lastPeserta.nomorSertifikat! + 1 : 1;
+
+		// Generate data dengan nomor sertifikat yang terurut
+		const dataPeserta = body.participants.map((p: { name: string; email: string }, index: number) => {
+			const nomor = startNomor + index;
+			return {
 				nama: p.name,
 				email: p.email,
-			})),
+				nomorSertifikat: nomor, // disimpan dalam bentuk angka
+			};
+		});
+
+		// Simpan data peserta
+		const result = await prisma.peserta.createMany({
+			data: dataPeserta,
 		});
 
 		return NextResponse.json(
@@ -51,7 +66,7 @@ export async function GET() {
 	try {
 		const peserta = await prisma.peserta.findMany({
 			orderBy: {
-				createdAt: "desc",
+				nomorSertifikat: "asc",
 			},
 		});
 

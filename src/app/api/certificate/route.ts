@@ -27,21 +27,30 @@ export async function GET(request: NextRequest) {
 
 		const templatePath = path.join(basePath, "images", "certificate-template.png");
 		const fontPath = path.join(basePath, "fonts", "Montserrat-Italic-VariableFont_wght.ttf");
+		const robotoFontPath = path.join(basePath, "fonts", "Roboto-VariableFont_wdth,wght.ttf");
 
 		if (!fs.existsSync(templatePath)) {
 			return NextResponse.json({ error: "Template sertifikat tidak ditemukan" }, { status: 500 });
 		}
 
-		// Load font custom (jika ada)
-		if (fs.existsSync(fontPath)) {
-			registerFont(fontPath, { family: "Montserrat" });
-		}
+		registerFont(fontPath, { family: "Montserrat" });
+		registerFont(robotoFontPath, { family: "Robotos" });
 
 		const image = await loadImage(templatePath);
 		const canvas = createCanvas(image.width, image.height);
 		const ctx = canvas.getContext("2d");
 
 		ctx.drawImage(image, 0, 0, image.width, image.height);
+
+		// Teks tambahan di atas nama peserta (menggunakan font Roboto ukuran 19px)
+		ctx.font = '400 42px "Robotos"'; // Mengatur ukuran font Roboto menjadi 19px
+		ctx.fillStyle = "#000000"; // Warna teks
+		ctx.textAlign = "center"; // Menyelaraskan teks di tengah
+
+		// Teks tambahan di atas nama peserta
+		const nomorFormatted = String(peserta.nomorSertifikat || 0).padStart(3, "0");
+		const teksAtas = `Nomor : ${nomorFormatted}/KombelGuruSIGAP/04/2025`; // Teks tambahan di atas nama peserta
+		ctx.fillText(teksAtas, image.width / 2, image.height / 2 - 290); // Mengatur posisi 80px di atas nama peserta
 
 		// Atur gaya teks (font harus sama dengan yang diregister)
 		// ctx.font = '120px "Montserrat", sans-serif';

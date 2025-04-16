@@ -114,6 +114,7 @@ exports.Prisma.PesertaScalarFieldEnum = {
   id: 'id',
   nama: 'nama',
   email: 'email',
+  nomorSertifikat: 'nomorSertifikat',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

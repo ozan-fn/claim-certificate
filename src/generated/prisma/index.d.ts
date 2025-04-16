@@ -829,14 +829,25 @@ export namespace Prisma {
 
   export type AggregatePeserta = {
     _count: PesertaCountAggregateOutputType | null
+    _avg: PesertaAvgAggregateOutputType | null
+    _sum: PesertaSumAggregateOutputType | null
     _min: PesertaMinAggregateOutputType | null
     _max: PesertaMaxAggregateOutputType | null
+  }
+
+  export type PesertaAvgAggregateOutputType = {
+    nomorSertifikat: number | null
+  }
+
+  export type PesertaSumAggregateOutputType = {
+    nomorSertifikat: number | null
   }
 
   export type PesertaMinAggregateOutputType = {
     id: string | null
     nama: string | null
     email: string | null
+    nomorSertifikat: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -845,6 +856,7 @@ export namespace Prisma {
     id: string | null
     nama: string | null
     email: string | null
+    nomorSertifikat: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -853,16 +865,26 @@ export namespace Prisma {
     id: number
     nama: number
     email: number
+    nomorSertifikat: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
 
+  export type PesertaAvgAggregateInputType = {
+    nomorSertifikat?: true
+  }
+
+  export type PesertaSumAggregateInputType = {
+    nomorSertifikat?: true
+  }
+
   export type PesertaMinAggregateInputType = {
     id?: true
     nama?: true
     email?: true
+    nomorSertifikat?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -871,6 +893,7 @@ export namespace Prisma {
     id?: true
     nama?: true
     email?: true
+    nomorSertifikat?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -879,6 +902,7 @@ export namespace Prisma {
     id?: true
     nama?: true
     email?: true
+    nomorSertifikat?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -922,6 +946,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: PesertaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PesertaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: PesertaMinAggregateInputType
@@ -952,6 +988,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: PesertaCountAggregateInputType | true
+    _avg?: PesertaAvgAggregateInputType
+    _sum?: PesertaSumAggregateInputType
     _min?: PesertaMinAggregateInputType
     _max?: PesertaMaxAggregateInputType
   }
@@ -960,9 +998,12 @@ export namespace Prisma {
     id: string
     nama: string
     email: string
+    nomorSertifikat: number | null
     createdAt: Date
     updatedAt: Date
     _count: PesertaCountAggregateOutputType | null
+    _avg: PesertaAvgAggregateOutputType | null
+    _sum: PesertaSumAggregateOutputType | null
     _min: PesertaMinAggregateOutputType | null
     _max: PesertaMaxAggregateOutputType | null
   }
@@ -985,6 +1026,7 @@ export namespace Prisma {
     id?: boolean
     nama?: boolean
     email?: boolean
+    nomorSertifikat?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["peserta"]>
@@ -995,11 +1037,12 @@ export namespace Prisma {
     id?: boolean
     nama?: boolean
     email?: boolean
+    nomorSertifikat?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PesertaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nama" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["peserta"]>
+  export type PesertaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nama" | "email" | "nomorSertifikat" | "createdAt" | "updatedAt", ExtArgs["result"]["peserta"]>
 
   export type $PesertaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Peserta"
@@ -1008,6 +1051,7 @@ export namespace Prisma {
       id: string
       nama: string
       email: string
+      nomorSertifikat: number | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["peserta"]>
@@ -1405,6 +1449,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Peserta", 'String'>
     readonly nama: FieldRef<"Peserta", 'String'>
     readonly email: FieldRef<"Peserta", 'String'>
+    readonly nomorSertifikat: FieldRef<"Peserta", 'Int'>
     readonly createdAt: FieldRef<"Peserta", 'DateTime'>
     readonly updatedAt: FieldRef<"Peserta", 'DateTime'>
   }
@@ -1763,6 +1808,7 @@ export namespace Prisma {
     id: 'id',
     nama: 'nama',
     email: 'email',
+    nomorSertifikat: 'nomorSertifikat',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -1806,6 +1852,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -1820,16 +1880,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Float'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
   /**
-   * Reference to a field of type 'Int[]'
+   * Reference to a field of type 'Float[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -1843,6 +1903,7 @@ export namespace Prisma {
     id?: StringFilter<"Peserta"> | string
     nama?: StringFilter<"Peserta"> | string
     email?: StringFilter<"Peserta"> | string
+    nomorSertifikat?: IntNullableFilter<"Peserta"> | number | null
     createdAt?: DateTimeFilter<"Peserta"> | Date | string
     updatedAt?: DateTimeFilter<"Peserta"> | Date | string
   }
@@ -1851,6 +1912,7 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     email?: SortOrder
+    nomorSertifikat?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -1862,6 +1924,7 @@ export namespace Prisma {
     OR?: PesertaWhereInput[]
     NOT?: PesertaWhereInput | PesertaWhereInput[]
     nama?: StringFilter<"Peserta"> | string
+    nomorSertifikat?: IntNullableFilter<"Peserta"> | number | null
     createdAt?: DateTimeFilter<"Peserta"> | Date | string
     updatedAt?: DateTimeFilter<"Peserta"> | Date | string
   }, "id" | "email">
@@ -1870,11 +1933,14 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     email?: SortOrder
+    nomorSertifikat?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: PesertaCountOrderByAggregateInput
+    _avg?: PesertaAvgOrderByAggregateInput
     _max?: PesertaMaxOrderByAggregateInput
     _min?: PesertaMinOrderByAggregateInput
+    _sum?: PesertaSumOrderByAggregateInput
   }
 
   export type PesertaScalarWhereWithAggregatesInput = {
@@ -1884,6 +1950,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Peserta"> | string
     nama?: StringWithAggregatesFilter<"Peserta"> | string
     email?: StringWithAggregatesFilter<"Peserta"> | string
+    nomorSertifikat?: IntNullableWithAggregatesFilter<"Peserta"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Peserta"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Peserta"> | Date | string
   }
@@ -1892,6 +1959,7 @@ export namespace Prisma {
     id?: string
     nama: string
     email: string
+    nomorSertifikat?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -1900,6 +1968,7 @@ export namespace Prisma {
     id?: string
     nama: string
     email: string
+    nomorSertifikat?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -1907,6 +1976,7 @@ export namespace Prisma {
   export type PesertaUpdateInput = {
     nama?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    nomorSertifikat?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -1914,6 +1984,7 @@ export namespace Prisma {
   export type PesertaUncheckedUpdateInput = {
     nama?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    nomorSertifikat?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -1922,6 +1993,7 @@ export namespace Prisma {
     id?: string
     nama: string
     email: string
+    nomorSertifikat?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -1929,6 +2001,7 @@ export namespace Prisma {
   export type PesertaUpdateManyMutationInput = {
     nama?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    nomorSertifikat?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -1936,6 +2009,7 @@ export namespace Prisma {
   export type PesertaUncheckedUpdateManyInput = {
     nama?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    nomorSertifikat?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -1955,6 +2029,18 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -1970,14 +2056,20 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     email?: SortOrder
+    nomorSertifikat?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type PesertaAvgOrderByAggregateInput = {
+    nomorSertifikat?: SortOrder
   }
 
   export type PesertaMaxOrderByAggregateInput = {
     id?: SortOrder
     nama?: SortOrder
     email?: SortOrder
+    nomorSertifikat?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -1986,8 +2078,13 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     email?: SortOrder
+    nomorSertifikat?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type PesertaSumOrderByAggregateInput = {
+    nomorSertifikat?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2008,6 +2105,23 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -2026,6 +2140,15 @@ export namespace Prisma {
     set?: string
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+    unset?: boolean
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -2042,6 +2165,18 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -2081,6 +2216,35 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
