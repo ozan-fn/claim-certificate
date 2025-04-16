@@ -3,6 +3,13 @@
 import Protected from "@/layouts/Protected";
 import React, { useState, useEffect } from "react";
 
+const getToken = () => {
+	if (typeof window !== "undefined") {
+		return localStorage.getItem("token");
+	}
+	return null;
+};
+
 export default function Page() {
 	const [inputText, setInputText] = useState("");
 	const [participants, setParticipants] = useState<{ email: string; name: string }[]>([]);
@@ -20,7 +27,11 @@ export default function Page() {
 	const fetchParticipants = async () => {
 		try {
 			setIsLoadingData(true);
-			const response = await fetch("/api/peserta");
+			const response = await fetch("/api/peserta", {
+				headers: {
+					Authorization: `Bearer ${getToken()}`,
+				},
+			});
 			const data = await response.json();
 
 			if (data.peserta) {
@@ -100,6 +111,7 @@ export default function Page() {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization: `Bearer ${getToken()}`,
 				},
 				body: JSON.stringify({ participants }),
 			});
@@ -131,6 +143,9 @@ export default function Page() {
 		try {
 			const response = await fetch(`/api/peserta?id=${id}`, {
 				method: "DELETE",
+				headers: {
+					Authorization: `Bearer ${getToken()}`,
+				},
 			});
 
 			if (!response.ok) {
